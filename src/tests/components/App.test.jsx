@@ -1,5 +1,5 @@
 import React from "react"
-import { render, screen, fireEvent } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import App from "../../App"
 import { PATH_LINKS, URL_LINKS } from "../../components/vars"
 
@@ -121,11 +121,10 @@ const expectToHaveDefaultForwardKinematics = () => {
     for (const leg of legs) {
         for (const angle of angles) {
             const label = `${leg}-${angle}`
-            const node = screen.getByRole((role, node) => {
-                return role === "spinbutton" && node.getAttribute("id") === label
-            })
+            const node = document.getElementById(label)
 
             expect(node).toBeInTheDocument()
+            expect(node).toHaveAttribute("type", "number")
         }
     }
 }

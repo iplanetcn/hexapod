@@ -1,5 +1,5 @@
 import React from "react"
-import { Route, Switch, Redirect } from "react-router-dom"
+import { Route, Routes, Navigate } from "react-router-dom"
 import { PATHS } from "./components/vars"
 import * as defaults from "./templates"
 import { VirtualHexapod } from "./hexapod"
@@ -12,26 +12,14 @@ import {
 } from "./components/pages"
 
 const Page = ({ pageComponent }) => (
-    <Switch>
-        <Route path="/" exact>
-            {pageComponent(LandingPage)}
-        </Route>
-        <Route path={PATHS.legPatterns.path} exact>
-            {pageComponent(LegPatternPage)}
-        </Route>
-        <Route path={PATHS.forwardKinematics.path} exact>
-            {pageComponent(ForwardKinematicsPage)}
-        </Route>
-        <Route path={PATHS.inverseKinematics.path} exact>
-            {pageComponent(InverseKinematicsPage)}
-        </Route>
-        <Route path={PATHS.walkingGaits.path} exact>
-            {pageComponent(WalkingGaitsPage)}
-        </Route>
-        <Route>
-            <Redirect to="/" />
-        </Route>
-    </Switch>
+    <Routes>
+        <Route path="/" element={pageComponent(LandingPage)} />
+        <Route path={PATHS.legPatterns.path} element={pageComponent(LegPatternPage)} />
+        <Route path={PATHS.forwardKinematics.path} element={pageComponent(ForwardKinematicsPage)} />
+        <Route path={PATHS.inverseKinematics.path} element={pageComponent(InverseKinematicsPage)} />
+        <Route path={PATHS.walkingGaits.path} element={pageComponent(WalkingGaitsPage)} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
 )
 
 const updateHexapod = (updateType, newParam, oldHexapod) => {

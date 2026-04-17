@@ -69,7 +69,7 @@ class App extends React.Component {
      * * * * * * * * * * * * * */
 
     render = () => (
-        <Router>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <Nav />
             <div id="main">
                 <div id="sidebar">

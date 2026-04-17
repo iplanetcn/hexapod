@@ -16,13 +16,12 @@ class LegPoseWidget extends Component {
             const props = {
                 id,
                 name: angle,
-                key: id,
                 value: this.props.pose[angle],
                 rangeParams: RANGE_PARAMS[angle],
                 handleChange: this.updateFieldState,
             }
 
-            return <Component {...props} />
+            return <Component key={id} {...props} />
         })
     }
 
